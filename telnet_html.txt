@@ -1,0 +1,10 @@
+/*
+ * Как с помощью telnet получить содержимое страницы?
+ * Подробнее: http://company.yandex.ru/job/vacancies/dev_junior_java.xml
+ */
+Используя утилину telnet в GNU/Linux.
+telnet www.company.yandex.ru 80
+>GET /job/vacancies/?city=msk HTTP/1.1
+>Host: www.yandex.ru
+[enter]
+[enter]
