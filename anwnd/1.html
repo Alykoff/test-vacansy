@@ -1,0 +1,83 @@
+<!--
+***********************************
+@author: Alykoff Gali
+@date: 07.03.2013
+
+Tasks #1
+Сверстать трехколоночный резиновый макет
+левая колонка фиксированная;
+правая занимает % от всей ширины экрана;
+средняя - оставшееся пространство;
+колонки одинаковой высоты – 100% высоты окна браузера;
+при изменении ширины/высоты окна браузера, макет не теряет целостность;
+Необходимо использовать блочную верстку.
+
+***********************************
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test 1</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <style type="text/css">
+    html {
+      overflow: auto;
+    }
+    html, body, div, span, p, a, h1 {
+      border:         0;
+      font-size:      100%;
+      padding:        0;
+      margin:         0;
+      font:           inherit;
+      vertical-align: top;
+    }
+    html, body {
+      height: auto;
+    }
+    .wrapper {
+      position:   absolute;
+      height:     100%;
+      min-width:  300px;
+      width:      100%;
+    }
+    .column {
+      display:    block;
+      padding:    0 5px;
+      height:     100%;
+      text-align: justify;
+      word-break: break-all;
+    }
+    .column_left {
+      float:  left;
+      width:  200px;
+    }
+    .column_center {
+      margin-left:  200px;
+      margin-right: 20%;
+    }
+    .column_right {
+      float:  right;
+      width:  20%;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+      <div class="column column_left">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+      </div>
+      <div class="column column_right">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+      </div>
+      <div class="column column_center">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+      </div>
+  </div>
+</body>
+</html>
