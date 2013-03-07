@@ -78,7 +78,7 @@ public class Calculator {
     double secondNum = Double.parseDouble(rawSecondNum);
 
     for (Operator operator : OPERATORS) {
-      if (operator.simbol.equals(operation)) {
+      if (operator.SIMBOL.equals(operation)) {
         return operator.apply(firstNum, secondNum);
       }
     }
@@ -87,9 +87,9 @@ public class Calculator {
 }
 
 abstract class Operator {
-  String simbol;
+  final String SIMBOL;
   Operator(String simbol) {
-    this.simbol = simbol;
+    this.SIMBOL = SIMBOL;
   }
   abstract double apply(double firstNum, double secondNum);
 }
