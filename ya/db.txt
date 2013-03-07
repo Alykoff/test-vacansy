@@ -1,0 +1,25 @@
+CREATE TABLE track_downloads (
+  download_id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  track_id INT NOT NULL,
+  user_id BIGINT(20) NOT NULL,
+  download_time TIMESTAMP NOT NULL DEFAULT 0,
+  PRIMARY KEY (download_id)
+);
+
+Напишите SQL-запрос, возвращающий все пары (download_count, user_count), удовлетворяющие следующему условию: user_count – общее ненулевое число пользователей, сделавших ровно download_count скачиваний 19 ноября 2010 года.
+
+select
+   count(*) as user_count,
+   t.download_count
+from (select
+           user_id,
+           count(*) as download_count
+       from
+           track_downloads
+       where
+           DATE(download_time) = '2010-11-19'
+       group by
+           user_id
+   ) as t
+group by
+   download_count
