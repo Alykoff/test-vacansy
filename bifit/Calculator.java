@@ -26,30 +26,38 @@ import java.util.regex.Matcher;
 
 public class Calculator {
   private final static Operator[] OPERATORS = 
-    new Operator[] {new Plus(), new Minus(), new Multi(), new Div()};
-  private final static String EXP_UNSIGN_NUM =
+    new Operator[] {
+      new Plus(), 
+      new Minus(), 
+      new Multi(), 
+      new Div()};
+  private final static String EXP_NUM =
     "(-?0|-?0\\.\\d+|-?[1-9]\\d*\\.\\d+|-?[1-9]\\d*)";
-  private final static String EXP_FIRST_NUM =
-    "^" + EXP_UNSIGN_NUM;
-  private final static String EXP_SECOND_NUM =
-    EXP_UNSIGN_NUM + "$";
-  private final static String EXP_OPERATOR =
+  private final static String EXP_OPERATOR = 
     "([-\\*\\+\\/])";
   private final static String EXP_VALID_EXPRESSION =
-     EXP_FIRST_NUM + EXP_OPERATOR + EXP_SECOND_NUM;
+    "^" + EXP_NUM + EXP_OPERATOR + EXP_NUM + "?";
   private final static Pattern PATTERN_EXPRESSION =
     Pattern.compile(EXP_VALID_EXPRESSION);
 
+  private Calculator() {}
+
   public static void main(String[] args) {
+    String expression;
     try {
-      String expression = args[0];
-      double result = calc(expression);
-      System.out.println(result);
+      expression = args[0];
     } catch (ArrayIndexOutOfBoundsException e) {
       throw new RuntimeException(e);
     }
+    double result = calc(expression);
+    System.out.println(result);
   }
-
+  /**
+   * Simple calculator.
+   * @param expression follows the contract:
+   *        [NUM][+,-,*,/][NUM].
+   * @return calculated result.
+   */
   public static double calc(String expression) {
     Matcher m = PATTERN_EXPRESSION.matcher(expression);
     String rawFirstNum = null;

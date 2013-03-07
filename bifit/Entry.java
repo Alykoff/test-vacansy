@@ -26,11 +26,8 @@
 
 import java.io.IOException;
 import java.io.FileReader;
-import java.io.PrintStream;
 import java.io.BufferedReader;
-import java.lang.IllegalArgumentException;
 import java.util.regex.Pattern;
-import java.nio.charset.Charset;
 
 public class Entry {
   private final static String EXP_NOT_WORD = "[^\\p{L}]";
@@ -38,24 +35,18 @@ public class Entry {
   private final static Pattern PATTERN = 
     Pattern.compile(EXP_NOT_WORD);
 
+  private Entry() {}
+
   public static void main(String[] args) {
-    System.out.println(
-      "For languages other than English: " + 
-      "support only " + SUPPORT_ENCODING + 
-      " encoding files.");
+    String pathToFile, standartWord;
     try {
-      String pathToFile = args[0];
-      String standartWord = args[1];
-      if (PATTERN.matcher(standartWord).find()) {
-        throw new RuntimeException(
-          "Illigal word. Word must contains" + 
-          " only letters.");
-      }
-      long numWord = wordCount(pathToFile, standartWord);
-      System.out.println(numWord);
+      pathToFile = args[0];
+      standartWord = args[1];
     } catch (ArrayIndexOutOfBoundsException e) {
       throw new RuntimeException(e);
     } 
+    long numWord = wordCount(pathToFile, standartWord);
+    System.out.println(numWord);
   }
 
   /**
@@ -70,6 +61,11 @@ public class Entry {
    *         setting down in `pathToFile`.
    */
   public static long wordCount(String pathToFile, String standartWord) {
+    if (PATTERN.matcher(standartWord).find()) {
+      throw new RuntimeException(
+        "Illigal word. Word must contains" + 
+        " only letters.");
+    }
     long count = 0;
     try {
       BufferedReader reader = 

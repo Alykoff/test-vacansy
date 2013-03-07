@@ -15,16 +15,20 @@
  *********************************************************/
 
 public class Factorial {
-   public static void main(String[] args) {
+
+  private Factorial() {}
+
+  public static void main(String[] args) {
+    long num;
     try {
-      long num = Long.parseLong(args[0]);
-      long factorial = calc(num);
-      System.out.println(factorial);
+      num = Long.parseLong(args[0]);
     } catch (NumberFormatException e) {
       throw new RuntimeException(e);
     } catch (ArrayIndexOutOfBoundsException e) {
       throw new RuntimeException(e);
     }
+    long factorial = calc(num);
+    System.out.println(factorial);
   }
   /**
    * Calculate factorian number `n`.

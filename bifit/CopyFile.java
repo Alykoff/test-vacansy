@@ -19,60 +19,64 @@
  *    java Calculator 4+12
  *
  *********************************************************/
-import java.nio.*;
-import java.nio.channels.*;
-import java.io.*;
+import java.nio.channels.FileChannel;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 
 public class CopyFile {
-  
+  private CopyFile() {}
+
   public static void main(String[] args) {
-    String source = args[0];
-    String target = args[1];
-    copyFile(source, target + "1");
-    copy(source, target);
-  }
-  public static void copy(String source, String target) {
-    long date = new Date().getTime();
+    String source, target;
     try {
-      // Getting file channels
-      FileChannel in = new FileInputStream(source).getChannel();
-      FileChannel out = new FileOutputStream(target).getChannel();
+      source = args[0];
+      target = args[1];
+    } catch (ArrayIndexOutOfBoundsException e) {
+      throw new RuntimeException(e);
+    }
+    Timer timer = new Timer();
+    copy(source, target);
+    System.out.println(timer.getReadableInterval());
+  }
+
+  public static void copy(String source, String target) {
+    try {
+      FileInputStream fileInput = new FileInputStream(source);
+      FileOutputStream fileOutput = new FileOutputStream(target);
+      FileChannel in = fileInput.getChannel();
+      FileChannel out = fileOutput.getChannel();
       try {
-        in.transferTo (0, in.size(), out);
+        in.transferTo (0L, in.size(), out);
       } finally {
         out.close();
         in.close();
+        fileOutput.close();
+        fileInput.close();
       }
     } catch(IOException e) {
       new RuntimeException(e);
     }
-    long newDate = new Date().getTime();
-    System.out.println((double)(newDate - date)/ 1000 + " sec");
   }
+}
 
-  public static void copyFile(String source, String destination) {
-    long date = new Date().getTime();
-    try {
-      BufferedInputStream in = new BufferedInputStream(new FileInputStream(source));
-      BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(destination));
-      try {
-        int len = 0, b = 0;
-        while ((b = in.read()) != -1) {
-          out.write(b);
-          len += b;
-        }
-      } finally {
-        in.close();
-        out.close();
-      }
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    long newDate = new Date().getTime();
-    System.out.println((double)(newDate - date)/ 1000 + " sec");
+
+class Timer {
+  private long date;
+  private final static double MILLSEC_IN_SEC = 1000D;
+  Timer() {
+    this.date = new Date().getTime();
   }
-
+  
+  long getInterval() {
+    long currentDate = new Date().getTime();
+    return currentDate - this.date;
+  }
+  
+  String getReadableInterval() {
+    return (this.getInterval() / MILLSEC_IN_SEC) +
+           " sec.";
+  }
+  
 }
