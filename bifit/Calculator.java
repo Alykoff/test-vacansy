@@ -16,7 +16,8 @@
  * Compile:
  *    javac Calculator.java
  * Start: 
- *    java Calculator 4+12
+ *    java Calculator 4+12    //16.0
+ *    java Calculator -4+-12  //-16.0
  *
  *********************************************************/
 import java.lang.ArithmeticException;
@@ -25,7 +26,7 @@ import java.util.regex.Matcher;
 
 public class Calculator {
   private final static Operator[] OPERATORS = 
-    new Operator[]{new Plus(), new Minus(), new Multi(), new Div()};
+    new Operator[] {new Plus(), new Minus(), new Multi(), new Div()};
   private final static String EXP_UNSIGN_NUM =
     "(-?0|-?0\\.\\d+|-?[1-9]\\d*\\.\\d+|-?[1-9]\\d*)";
   private final static String EXP_FIRST_NUM =
