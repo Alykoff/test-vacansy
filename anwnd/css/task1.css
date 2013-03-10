@@ -1,0 +1,39 @@
+html {
+  overflow: auto;
+}
+html, body, div, p {
+  border:         0;
+  font-size:      100%;
+  padding:        0;
+  margin:         0;
+  font:           inherit;
+  vertical-align: top;
+}
+html, body {
+  height: auto;
+}
+.wrapper {
+  position:   absolute;
+  height:     100%;
+  min-width:  300px;
+  width:      100%;
+}
+.column {
+  display:    block;
+  padding:    0 5px;
+  height:     100%;
+  text-align: justify;
+  word-break: break-all;
+}
+.column_left {
+  float:  left;
+  width:  200px;
+}
+.column_center {
+  margin-left:  200px;
+  margin-right: 20%;
+}
+.column_right {
+  float:  right;
+  width:  20%;
+}
