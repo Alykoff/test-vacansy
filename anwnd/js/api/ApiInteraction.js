@@ -3,7 +3,7 @@
  * @date: may 2013
  */
 
-define(['ApiInteractionAbstract', 'Utils', 'jquery'], 
+define(['api/ApiInteractionAbstract', 'utils/Utils', 'jquery'], 
   function(ApiInteractionAbstract, Utils, $) {
   var ApiInteraction = function() {
     var MINUTE_UNDER_REFRESH = 1; // N

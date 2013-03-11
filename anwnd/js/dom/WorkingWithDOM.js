@@ -3,7 +3,7 @@
  * @date: may 2013
  */
 
-define(['jquery', 'DisplayFolder', 'DOMClasses'], function($, DisplayFolder, DOMClasses) {
+define(['jquery', 'dom/DisplayFolder', 'dom/DOMClasses'], function($, DisplayFolder, DOMClasses) {
   var WorkingWithDOM = function() {
     var 
       displayFolder = new DisplayFolder(),
@@ -11,6 +11,7 @@ define(['jquery', 'DisplayFolder', 'DOMClasses'], function($, DisplayFolder, DOM
       CLASS_FOLDER = classes.getFolder(),
       CLASS_FOLDER_TITLE = classes.getFolderTitle(),
       CLASS_FOLD_FLAG = classes.getFoldFlag(),
+      CLASS_WAIT = classes.getWaiting(),
       initClickEventOnFolderTitle = function() {
         $('.' + CLASS_FOLDER_TITLE).live('click', function(e) {
           e.preventDefault();
@@ -42,6 +43,15 @@ define(['jquery', 'DisplayFolder', 'DOMClasses'], function($, DisplayFolder, DOM
     };
     this.initDOMEvents = function() {
       initClickEventOnFolderTitle();
+    };
+    this.progressResult = function(state, maxState) {
+      var wait = $('.' + CLASS_WAIT);
+      if (wait.length !== 0 && state === maxState) {
+        wait.remove();
+      } else {
+        var msg = 'Please, waiting...(' + state + ' / ' + maxState + ')';
+        wait.text(msg);
+      }
     };
   };
   return WorkingWithDOM;

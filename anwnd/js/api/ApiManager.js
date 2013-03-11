@@ -4,13 +4,14 @@
  */
 
 var classes = [
-  'ApiManagerAbstract', 
-  'Utils', 
-  'ApiInteraction', 
-  'ApiError',
-  'ListenerAbstract'];
+  'api/ApiManagerAbstract', 
+  'utils/Utils', 
+  'api/ApiInteraction', 
+  'api/ApiError',
+  'listener/ListenerAbstract',
+  'dom/WorkingWithDOM'];
 
-define(classes, function(ApiManagerAbstract, Utils, ApiInteraction, ApiError, ListenerAbstract) {
+define(classes, function(ApiManagerAbstract, Utils, ApiInteraction, ApiError, ListenerAbstract, WorkingWithDOM) {
     var ApiManager = function() {
       var listenersObtainingResult = [];
       var applyListnersEventObtainingResult = function(data) {
@@ -32,6 +33,7 @@ define(classes, function(ApiManagerAbstract, Utils, ApiInteraction, ApiError, Li
       this.start = function() {
         var api = new ApiInteraction();
         var error = new ApiError();
+        var workingWithDOM = new WorkingWithDOM();
         var getIdCallback = function() {
           api.checkRequestState(
             error.checkRequestStateError, 
@@ -45,6 +47,7 @@ define(classes, function(ApiManagerAbstract, Utils, ApiInteraction, ApiError, Li
               getSearchResultCallback
             );
           };
+          workingWithDOM.progressResult(api.state, api.END_REQUEST_STATE);
           console.log('state: ' + api.state);
           if (api.isComplete()) {
             callGetSearchResult();

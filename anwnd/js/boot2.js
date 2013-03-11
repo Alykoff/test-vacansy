@@ -6,11 +6,11 @@
 require.config({
    paths: {
         jquery: [
-            'lib/jquery-1.8.3'
+          'lib/jquery-1.8.3'
         ]
     }
 });
-define(['lib/domReady', 'ApiManager', 'WorkingWithDOM', 'ListenerEventObtainingResult'], 
+define(['lib/domReady', 'api/ApiManager', 'dom/WorkingWithDOM', 'listener/ListenerEventObtainingResult'], 
   function(domReady, ApiManager, WorkingWithDOM, ListenerEventObtainingResult) {
     domReady(function() {
       var listener = new ListenerEventObtainingResult();

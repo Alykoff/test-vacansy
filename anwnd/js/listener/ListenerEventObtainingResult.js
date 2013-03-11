@@ -3,7 +3,7 @@
  * @date: may 2013
  */
 
-define(['Utils', 'ListenerAbstract', 'WorkingWithDOM'], 
+define(['utils/Utils', 'listener/ListenerAbstract', 'dom/WorkingWithDOM'], 
   function(Utils, ListenerAbstract, WorkingWithDOM) {
    
     var ListenerEventObtainingResult = function() {

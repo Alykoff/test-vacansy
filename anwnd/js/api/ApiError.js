@@ -3,7 +3,7 @@
  * @date: may 2013
  */
 
-define(['ApiErrorAbstract', 'Utils'], function(ApiErrorAbstract, Utils) {
+define(['api/ApiErrorAbstract', 'utils/Utils'], function(ApiErrorAbstract, Utils) {
   var ApiError = function() {
     this.getIdError = function() {
       console.log('err');

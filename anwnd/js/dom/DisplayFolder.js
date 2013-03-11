@@ -3,7 +3,7 @@
  * @date: may 2013
  */
 
-define(['jquery', 'DOMClasses'], function($, DOMClasses) {
+define(['jquery', 'dom/DOMClasses'], function($, DOMClasses) {
   var DisplayFolder = function() {
     var 
       classes = new DOMClasses();
@@ -65,7 +65,6 @@ define(['jquery', 'DOMClasses'], function($, DOMClasses) {
           var folder = createFolder(companyCode).appendTo(wrapper);
           createFolderTitle(companyName).appendTo(folder);
           createFoldArea().appendTo(folder);
-          console.log('Add new folder.')
         };
       if ($('#' + companyCode).length === 0) {
         buildFolderStruct();
