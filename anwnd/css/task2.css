@@ -1,3 +1,9 @@
+/**
+ * @author: Alykoff Gali
+ * @date: may 2013
+ */
+
+
 html {
   overflow: auto;
 }
@@ -33,6 +39,8 @@ li {
   font-weight:  100;
 }
 .folder_title {
+  background: url("../img/folder.png") no-repeat left;
+  padding:           3px 0 3px 25px;
   font-size:    16px;
   font-weight:  600;
 }

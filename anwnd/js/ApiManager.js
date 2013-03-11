@@ -55,7 +55,6 @@ define(classes, function(ApiManagerAbstract, Utils, ApiInteraction, ApiError, Li
           }
         };
         var getSearchResultCallback = function() {
-          console.log(api.dataBuffer);
           applyListnersEventObtainingResult(api.dataBuffer);          
         };
         api.getId(error.getIdError, getIdCallback);
