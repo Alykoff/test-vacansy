@@ -1,0 +1,113 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><style>html { 
+    font-size: 100%; 
+    overflow-y: scroll; 
+    -webkit-text-size-adjust: 100%; 
+    -ms-text-size-adjust: 100%; 
+}
+
+body{
+    font-family: helvetica, arial, freesans, clean, sans-serif;
+    color: #333;
+    background-color: #fff;
+    border-color: #999999;
+    border-width: 2px;
+    line-height: 1.5;
+    margin: 2em 3em;
+    text-align:left;
+    padding: 0 100px 0 100px;
+}
+
+pre{
+    background-color: #eee;
+    padding: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: auto;
+}
+code{
+    background-color: #eee;
+    padding: 1px 3px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px; 
+}
+pre code {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+li p{
+    margin: 0.3em;
+}
+ul > li{
+    list-style-type: disc;
+}
+a:link, a:visited{
+    color: #33e;
+    text-decoration: none;
+}
+a:hover{
+    color: #00f;
+    text-shadow:1px 1px 2px #ccf;
+    text-decoration:underline;
+}
+h1{
+    color: #999;
+    font-weight: 400;
+    font-size: 36px;
+}
+h2{
+    border-bottom: 1px dotted #aaa;
+    margin-bottom: 1em;
+    color: #333;
+    font-size: 30px;
+}
+h3{
+    color: #666;
+    font-size: 24px;
+}
+h4 {
+    font-size: 21px;
+}
+h5 {
+    font-size: 18px;
+}
+.shadow{
+    -webkit-box-shadow:0 5px 15px #000;
+    -moz-box-shadow:0 5px 15px #000;
+    box-shadow:0 5px 15px #000;     
+}
+</style></head><body><h2>Задача</h2>
+<pre><code>* Обслуживать HTTP запросы по URL "/search". В параметрах запроса передается параметр "query", содержащий ключевое слово для поиска. Параметров может быть несколько, в этом случае мы работаем с несколькими ключевыми словами. Пример "http://localhost:8080/search?query=jet&amp;query=smap". Предполагаем, что клиент будет передавать только алфавитно-цифровые запросы в ASCII. Однако, наличие корректной поддержки русского языка в кодировке UTF-8 будет плюсом.
+
+* Сервис должен обраться к API Яндекса поиска по форумам и блогам (http://api.yandex.ru/blogs/doc/search/concepts/general-info.xml, "поиск по записям и комментариям") по HTTP, получить ответ через RSS. В случае, если ключевых слов переданно больше одного, запросы должны выполняться параллельно (по одному HTTP запросу на ключевое слово). Должно быть ограничение на максимальное количество одновременных HTTP-соединений, это значение нельзя превышать. Если ключевых слов больше, нужно организовать очередь обработки так, чтобы более указанного количество соединений не открывалось. По каждому слову ищем только первые 10 записей. Пример запроса к API: http://blogs.yandex.ru/search.rss?text=scala
+
+* Из каждого результата извлекаем основную ссылку (поле link). Из ссылки берем hostname, из которого берется только домен второго уровня (т.е. из ссылки http://lenta.ru/photo/2012/11/28/lis/ оставляем только "lenta.ru")
+
+* В результате работы веб-сервиса должна быть возвращена статистика по доменам второго уровня - сколько раз в сумме использовался домен по всем ключевым словам. В случае, если по разным ключевым словам было найдены полностью идентичные ссылки, хост должен учитываться только один раз.
+
+* Результат должен быть предствлен в формате JSON. Выдача ответа с человеко-читаемым форматированием (pretty print) будет рассматриваться как плюс. Пример ответа: { "lenta.ru" : 5, "livejournal.com" : 10, "vk.com" : 20 }
+</code></pre>
+<h2>Ожидаемый результат</h2>
+<h5>Необходимо представить исходные тексты приложения. Приложение:</h5>
+<pre><code>* Должно компилироваться и работать
+
+* Должно собираться однострочной коммандой при помощи maven, sbt или другого средства сборки
+которое легко развернуть. Можно использовать play framework версии 2.
+
+* Должно запускаться одной коммандой. Например в виде runnable jar, допускается запуск через
+"mvn jetty:run" или аналогичное средство. Должно запускаться без необходимости отдельно разворачивать сервер приложений
+</code></pre>
+<h2>Как пользоваться</h2>
+<pre><code>* Для сборки и запуска проекта используется sbt.
+
+* Сборка проекта (в папке проекта):
+PROJECT_FOLDER&gt; sbt clean compile stage
+
+* Запуск проекта (в папке проекта):
+PROJECT_FOLDER&gt; sbt start
+</code></pre>
+<h2>Реализация</h2>
+<pre><code>* Алыков Гали.
+</code></pre></body></html>
