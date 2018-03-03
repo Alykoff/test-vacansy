@@ -1,0 +1,58 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+group 'eu.exante'
+version '1.0'
+
+mainClassName = 'eu.exante.Main'
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
+    configure(scalaCompileOptions.forkOptions) {
+        memoryMaximumSize = '256m'
+        jvmArgs = ['-Xms256m']
+    }
+}
+
+// For pass client type param in app -Dprop.type=client
+tasks.withType(JavaExec) {
+    def pref = 'prop.'
+    System.properties.each { k,v->
+        if (k.startsWith(pref)) {
+            systemProperty k - pref, v
+        }
+    }
+}
+
+task fatJar(type: Jar) {
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+        attributes 'Main-Class': mainClassName
+    }
+}
+
+ext.deps = [
+        scalaVersion: '2.12.0',
+        akkaVersion: '2.4.14',
+        json4sVersion: '3.5.0',
+        slf4jVersion: '1.7.21',
+        logbackVersion: '1.1.7'
+]
+
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-library', version: deps.scalaVersion
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.12', version: deps.akkaVersion
+    compile group: 'com.typesafe.akka', name: 'akka-slf4j_2.12', version: deps.akkaVersion
+    compile group: 'org.json4s', name: 'json4s-native_2.12', version: deps.json4sVersion
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: deps.slf4jVersion
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: deps.logbackVersion
+}
